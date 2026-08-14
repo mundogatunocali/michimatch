@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MichiMatch | Reencuentra a tu compañero</title>
+
+    <meta
+        name="description"
+        content="MichiMatch es una iniciativa de Mundo Gatuno Cali para ayudar a reunir gatos y perros perdidos con sus familias."
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7faf8;
+            color: #26332d;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #16845b;
+        }
+
+        .logo span {
+            color: #f39c4a;
+        }
+
+        .header-link {
+            text-decoration: none;
+            color: #16845b;
+            font-weight: bold;
+        }
+
+        .hero {
+            padding: 70px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #e7f7ef, #fff4e8);
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            margin-bottom: 15px;
+            color: #155c43;
+        }
+
+        .hero h2 {
+            font-size: 25px;
+            margin-bottom: 20px;
+            color: #34443c;
+            font-weight: normal;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+            color: #53635b;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .primary {
+            background: #16845b;
+            color: white;
+        }
+
+        .secondary {
+            background: #f39c4a;
+            color: white;
+        }
+
+        .section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 60px 20px;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 32px;
+            color: #155c43;
+            margin-bottom: 15px;
+        }
+
+        .section-intro {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-align: center;
+            color: #5d6b64;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+        }
+
+        .card-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 23px;
+            margin-bottom: 10px;
+            color: #155c43;
+        }
+
+        .card p {
+            color: #5d6b64;
+            margin-bottom: 20px;
+        }
+
+        .how-it-works {
+            background: #ffffff;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #16845b;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+            color: #155c43;
+        }
+
+        .mission {
+            background: #155c43;
+            color: white;
+            text-align: center;
+        }
+
+        .mission h2 {
+            color: white;
+        }
+
+        .mission p {
+            max-width: 750px;
+            margin: 20px auto 0;
+            font-size: 18px;
+        }
+
+        .project-info {
+            text-align: center;
+            padding: 45px 20px;
+            background: #f3f7f4;
+        }
+
+        .project-info h2 {
+            color: #155c43;
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            color: #5d6b64;
+        }
+
+        footer {
+            background: #24342d;
+            color: #dce6e1;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero h2 {
+                font-size: 21px;
+            }
+
+            .cards,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                🐾 Michi<span>Match</span>
+            </div>
+
+            <a class="header-link" href="#como-funciona">
+                ¿Cómo funciona?
+            </a>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <h1>MichiMatch</h1>
+
+            <h2>Reencuentra a tu compañero</h2>
+
+            <p>
+                Una iniciativa de Mundo Gatuno Cali para ayudar a reunir
+                gatos y perros perdidos con sus familias.
+            </p>
+
+            <div class="buttons">
+                <a class="button primary" href="#buscar">
+                    🐱 Busco a mi compañero
+                </a>
+
+                <a class="button secondary" href="#encontre">
+                    🐾 Encontré uno
+                </a>
+            </div>
+        </section>
+
+
+        <section class="section" id="buscar">
+
+            <h2>¿Qué puedes hacer?</h2>
+
+            <p class="section-intro">
+                Cada reporte puede ser la pieza que falta para lograr
+                un reencuentro.
+            </p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-icon">🔎</div>
+
+                    <h3>Estoy buscando</h3>
+
+                    <p>
+                        Publica la información y fotografías de tu gato
+                        o perro perdido para ayudar a encontrarlo.
+                    </p>
+
+                    <a class="button primary" href="#">
+                        Publicar búsqueda
+                    </a>
+                </div>
+
+
+                <div class="card" id="encontre">
+                    <div class="card-icon">❤️</div>
+
+                    <h3>Encontré un animal</h3>
+
+                    <p>
+                        ¿Encontraste un gato o un perro? Reporta dónde
+                        está y comparte sus fotografías para ayudar a
+                        localizar a su familia.
+                    </p>
+
+                    <a class="button secondary" href="#">
+                        Publicar hallazgo
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="section how-it-works" id="como-funciona">
+
+            <h2>¿Cómo funciona MichiMatch?</h2>
+
+            <p class="section-intro">
+                La idea es conectar la información de animales perdidos
+                y encontrados para facilitar el reencuentro.
+            </p>
+
+            <div class="steps">
+
+                <div class="step">
+                    <div class="step-number">1</div>
+
+                    <h3>Publica</h3>
+
+                    <p>
+                        Registra un animal perdido o uno que hayas encontrado,
+                        incluyendo fotografías y ubicación.
+                    </p>
+                </div>
+
+
+                <div class="step">
+                    <div class="step-number">2</div>
+
+                    <h3>Comparamos</h3>
+
+                    <p>
+                        La plataforma podrá analizar fotografías,
+                        características, fechas y lugares para encontrar
+                        posibles coincidencias.
+                    </p>
+                </div>
+
+
+                <div class="step">
+                    <div class="step-number">3</div>
+
+                    <h3>Reencuentro</h3>
+
+                    <p>
+                        Las personas podrán comunicarse para verificar
+                        la coincidencia y ayudar a que el animal vuelva
+                        con su familia.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="section mission">
+
+            <h2>Una ayuda para tiempos difíciles</h2>
+
+            <p>
+                En situaciones como terremotos, evacuaciones o desastres,
+                muchos animales pueden asustarse, escapar o quedar separados
+                de sus familias. MichiMatch nace para ayudar a organizar
+                esos reportes y aumentar las posibilidades de encontrarlos.
+            </p>
+
+        </section>
+
+
+        <section class="project-info">
+
+            <h2>🐾 Una iniciativa de Mundo Gatuno Cali</h2>
+
+            <p>
+                Nacemos desde el amor por los gatos, pero abrimos nuestras
+                puertas también a los perros y a todas las familias que
+                necesiten ayuda para encontrar a sus compañeros.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            <strong>MichiMatch</strong> · Reencuentra a tu compañero
+        </p>
+
+        <p>
+            Iniciativa de Mundo Gatuno Cali
+        </p>
+
+        <p>
+            © 2026 MichiMatch
+        </p>
+
+    </footer>
+
+</body>
+</html>
