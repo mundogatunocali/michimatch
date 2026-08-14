@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MichiMatch | Reencuentra a tu compañero</title>
+    <title>MichiMatch | Reencuentro con  tu mascota</title>
 
     <meta
         name="description"
-        content="MichiMatch es una iniciativa de Mundo Gatuno Cali para ayudar a reunir gatos y perros perdidos con sus familias."
+        content="MichiMatch es una iniciativa de @mundogatunocali para ayudar a reunir gatos y perros perdidos con sus familias despues de esta tragedia del terremoto vivido."
     >
 
     <style>
@@ -287,7 +287,7 @@
         <section class="hero">
             <h1>MichiMatch</h1>
 
-            <h2>Reencuentra a tu compañero</h2>
+            <h2>Reencuentra a tu compañer@</h2>
 
             <p>
                 Una iniciativa de Mundo Gatuno Cali para ayudar a reunir
@@ -296,7 +296,7 @@
 
             <div class="buttons">
                 <a class="button primary" href="#buscar">
-                    🐱 Busco a mi compañero
+                    🐱 Busco a mi compañer@
                 </a>
 
                 <a class="button secondary" href="#encontre">
@@ -336,15 +336,15 @@
                 <div class="card" id="encontre">
                     <div class="card-icon">❤️</div>
 
-                    <h3>Encontré un animal</h3>
+                    <h3>Encontré una mascota</h3>
 
                     <p>
-                        ¿Encontraste un gato o un perro? Reporta dónde
+                        ¿Encontraste un gato o un perro? Reporta ubicación inicial dónde
                         está y comparte sus fotografías para ayudar a
-                        localizar a su familia.
+                        localizar a su familia (dale hogar de paso por favor).
                     </p>
 
-                    <a class="button secondary" href="#">
+                    <a class="button secondary" href="#formulario-hallazgo">
                         Publicar hallazgo
                     </a>
                 </div>
@@ -355,7 +355,7 @@
 
         <section class="section" id="formulario-busqueda">
 
-    <h2>🔎 Busca a tu compañero</h2>
+    <h2>🔎 Busca a tu compañer@</h2>
 
     <p class="section-intro">
         Cuéntanos sobre tu gato o perro perdido. Entre más información
@@ -366,9 +366,9 @@
 
         <div class="card">
 
-            <h3>Información del animal</h3>
+            <h3>Información de la mascota</h3>
 
-            <label for="tipo-animal">¿Qué animal estás buscando?</label>
+            <label for="tipo-animal">¿Qué mascota estás buscando?</label>
             <select id="tipo-animal" name="tipo-animal" required>
                 <option value="">Selecciona una opción</option>
                 <option value="gato">🐱 Gato</option>
@@ -377,7 +377,7 @@
 
             <br><br>
 
-            <label for="nombre-animal">Nombre del animal</label>
+            <label for="nombre-animal">Nombre de tu compañer@</label>
             <input
                 type="text"
                 id="nombre-animal"
@@ -410,7 +410,7 @@
             <br><br>
 
             <label for="descripcion-animal">
-                Características del animal
+                Características de tu compañer@
             </label>
 
             <textarea
@@ -424,7 +424,7 @@
             <br><br>
 
             <label for="foto-animal">
-                Fotografía del animal
+                Fotografía de tu compañer@
             </label>
 
             <input
@@ -474,8 +474,8 @@
             <h2>¿Cómo funciona MichiMatch?</h2>
 
             <p class="section-intro">
-                La idea es conectar la información de animales perdidos
-                y encontrados para facilitar el reencuentro.
+                La idea es conectar la información de mascotas perdidas
+                y encontradas para facilitar el reencuentro.
             </p>
 
             <div class="steps">
@@ -486,7 +486,7 @@
                     <h3>Publica</h3>
 
                     <p>
-                        Registra un animal perdido o uno que hayas encontrado,
+                        Registra una mascota perdida o uno que hayas encontrado,
                         incluyendo fotografías y ubicación.
                     </p>
                 </div>
@@ -528,12 +528,133 @@
 
             <p>
                 En situaciones como terremotos, evacuaciones o desastres,
-                muchos animales pueden asustarse, escapar o quedar separados
+                muchos gatos y perros pueden asustarse, escapar o quedar separados
                 de sus familias. MichiMatch nace para ayudar a organizar
                 esos reportes y aumentar las posibilidades de encontrarlos.
             </p>
 
         </section>
+
+        <section class="section" id="formulario-hallazgo">
+
+    <h2>❤️ Encontré una mascota</h2>
+
+    <p class="section-intro">
+        ¿Encontraste un gato o un perro que podría estar perdido?
+        Comparte la información para ayudar a que vuelva con su familia.
+    </p>
+
+    <form>
+
+        <div class="card">
+
+            <h3>Información de la mascota encontrada</h3>
+
+            <label for="tipo-hallazgo">
+                ¿Qué mascota encontraste?
+            </label>
+
+            <select id="tipo-hallazgo" name="tipo-hallazgo" required>
+                <option value="">Selecciona una opción</option>
+                <option value="gato">🐱 Gato</option>
+                <option value="perro">🐶 Perro</option>
+            </select>
+
+            <br><br>
+
+            <label for="fecha-hallazgo">
+                ¿Cuándo lo encontraste?
+            </label>
+
+            <input
+                type="date"
+                id="fecha-hallazgo"
+                name="fecha-hallazgo"
+                required
+            >
+
+            <br><br>
+
+            <label for="lugar-hallazgo">
+                ¿Dónde lo encontraste?
+            </label>
+
+            <input
+                type="text"
+                id="lugar-hallazgo"
+                name="lugar-hallazgo"
+                placeholder="Barrio, sector o lugar"
+                required
+            >
+
+            <br><br>
+
+            <label for="descripcion-hallazgo">
+                Describe la mascota
+            </label>
+
+            <textarea
+                id="descripcion-hallazgo"
+                name="descripcion-hallazgo"
+                rows="5"
+                placeholder="Color, tamaño, manchas, collar, características especiales..."
+                required
+            ></textarea>
+
+            <br><br>
+
+            <label for="foto-hallazgo">
+                Fotografía de la mascota
+            </label>
+
+            <input
+                type="file"
+                id="foto-hallazgo"
+                name="foto-hallazgo"
+                accept="image/*"
+                multiple
+            >
+
+            <br><br>
+
+            <h3>Datos de contacto</h3>
+
+            <label for="nombre-hallazgo">
+                Tu nombre
+            </label>
+
+            <input
+                type="text"
+                id="nombre-hallazgo"
+                name="nombre-hallazgo"
+                required
+            >
+
+            <br><br>
+
+            <label for="whatsapp-hallazgo">
+                WhatsApp
+            </label>
+
+            <input
+                type="tel"
+                id="whatsapp-hallazgo"
+                name="whatsapp-hallazgo"
+                placeholder="Ejemplo: 3001234567"
+                required
+            >
+
+            <br><br>
+
+            <button class="button secondary" type="submit">
+                ❤️ Publicar hallazgo
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
 
 
         <section class="project-info">
@@ -541,9 +662,8 @@
             <h2>🐾 Una iniciativa de Mundo Gatuno Cali</h2>
 
             <p>
-                Nacemos desde el amor por los gatos, pero abrimos nuestras
-                puertas también a los perros y a todas las familias que
-                necesiten ayuda para encontrar a sus compañeros.
+                Amor por nuetras mascotas. Todas las familias necesitan
+             ayuda para encontrar a sus compañeros.
             </p>
 
         </section>
@@ -558,7 +678,7 @@
         </p>
 
         <p>
-            Iniciativa de Mundo Gatuno Cali
+            Iniciativa de @mundogatunocali
         </p>
 
         <p>
