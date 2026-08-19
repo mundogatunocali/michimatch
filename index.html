@@ -686,6 +686,233 @@
         </p>
 
     </footer>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.1/firebase-app.js";
+  import {
+    getAuth,
+    signInAnonymously
+  } from "https://www.gstatic.com/firebasejs/12.7.1/firebase-auth.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.7.1/firebase-firestore.js";
 
+  // ==========================================
+  // CONFIGURACIÓN DE MICHI MATCH - FIREBASE
+  // ==========================================
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyATal1wtz3pTReSq4NZ5apZo1n0-jMpJQ",
+    authDomain: "michimatch-4dee7.firebaseapp.com",
+    projectId: "michimatch-4dee7",
+    storageBucket: "michimatch-4dee7.firebasestorage.app",
+    messagingSenderId: "1073439106427",
+    appId: "1:1073439106427:web:f4fa02f4434dde5cdec9de"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // ==========================================
+  // INICIAR USUARIO ANÓNIMO
+  // ==========================================
+
+  let usuarioActual = null;
+
+  try {
+    const resultado = await signInAnonymously(auth);
+    usuarioActual = resultado.user;
+    console.log("MichiMatch conectado a Firebase.");
+  } catch (error) {
+    console.error("Error al iniciar sesión anónima:", error);
+  }
+
+  // ==========================================
+  // FUNCIONES AUXILIARES
+  // ==========================================
+
+  function buscarCampo(formulario, nombres) {
+    for (const nombre of nombres) {
+      const campo = formulario.querySelector(`[name="${nombre}"]`);
+      if (campo) return campo;
+    }
+    return null;
+  }
+
+  function obtenerValor(formulario, nombres) {
+    const campo = buscarCampo(formulario, nombres);
+    return campo ? campo.value.trim() : "";
+  }
+
+  async function guardarReporte(formulario, tipoReporte) {
+
+    if (!usuarioActual) {
+      alert("No se pudo conectar con MichiMatch. Recarga la página e inténtalo nuevamente.");
+      return;
+    }
+
+    const tipoAnimal = obtenerValor(formulario, [
+      "tipo-animal",
+      "tipo-hallazgo",
+      "tipo"
+    ]);
+
+    const fecha = obtenerValor(formulario, [
+      "fecha-perdida",
+      "fecha-hallazgo",
+      "fecha"
+    ]);
+
+    const lugar = obtenerValor(formulario, [
+      "lugar-perdida",
+      "lugar-hallazgo",
+      "lugar",
+      "ubicacion"
+    ]);
+
+    const descripcion = obtenerValor(formulario, [
+      "descripcion-perdida",
+      "descripcion-hallazgo",
+      "descripcion"
+    ]);
+
+    const nombre = obtenerValor(formulario, [
+      "nombre-perdida",
+      "nombre-hallazgo",
+      "nombre"
+    ]);
+
+    const whatsapp = obtenerValor(formulario, [
+      "whatsapp-perdida",
+      "whatsapp-hallazgo",
+      "whatsapp",
+      "telefono"
+    ]);
+
+    if (!tipoAnimal || !fecha || !lugar || !descripcion || !nombre || !whatsapp) {
+      alert("Por favor completa todos los campos obligatorios.");
+      return;
+    }
+
+    const datosReporte = {
+      tipoReporte: tipoReporte,
+      tipoAnimal: tipoAnimal,
+      fecha: fecha,
+      lugar: lugar,
+      descripcion: descripcion,
+      nombreContacto: nombre,
+      whatsapp: whatsapp,
+
+      // Identidad anónima del creador
+      usuarioId: usuarioActual.uid,
+
+      // Estado inicial del caso
+      estado: "activo",
+
+      // Preparado para futuras funciones de IA
+      coincidenciaIA: null,
+
+      // Fecha en que se publicó el reporte
+      creadoEn: serverTimestamp()
+    };
+
+    try {
+
+      const documento = await addDoc(
+        collection(db, "reportes"),
+        datosReporte
+      );
+
+      console.log("Reporte guardado:", documento.id);
+
+      alert(
+        tipoReporte === "perdido"
+          ? "🐾 ¡Tu búsqueda fue publicada correctamente en MichiMatch!"
+          : "❤️ ¡El hallazgo fue publicado correctamente en MichiMatch!"
+      );
+
+      formulario.reset();
+
+    } catch (error) {
+
+      console.error("Error guardando el reporte:", error);
+
+      alert(
+        "No pudimos guardar el reporte. Revisa tu conexión a Internet e inténtalo nuevamente."
+      );
+    }
+  }
+
+  // ==========================================
+  // FORMULARIO: BUSCO A MI COMPAÑERO
+  // ==========================================
+
+  const todosLosFormularios = document.querySelectorAll("form");
+
+  let formularioBusqueda = null;
+  let formularioHallazgo = document.querySelector(
+    "#formulario-hallazgo form"
+  );
+
+  // El primer formulario será el de búsqueda
+  if (todosLosFormularios.length > 0) {
+    formularioBusqueda = todosLosFormularios[0];
+  }
+
+  if (formularioBusqueda) {
+    formularioBusqueda.addEventListener("submit", async function(evento) {
+      evento.preventDefault();
+
+      const boton = formularioBusqueda.querySelector(
+        'button[type="submit"]'
+      );
+
+      if (boton) {
+        boton.disabled = true;
+        boton.textContent = "Publicando...";
+      }
+
+      await guardarReporte(formularioBusqueda, "perdido");
+
+      if (boton) {
+        boton.disabled = false;
+        boton.textContent = "Publicar búsqueda";
+      }
+    });
+  }
+
+  // ==========================================
+  // FORMULARIO: ENCONTRÉ UN ANIMAL
+  // ==========================================
+
+  if (formularioHallazgo) {
+
+    formularioHallazgo.addEventListener("submit", async function(evento) {
+
+      evento.preventDefault();
+
+      const boton = formularioHallazgo.querySelector(
+        'button[type="submit"]'
+      );
+
+      if (boton) {
+        boton.disabled = true;
+        boton.textContent = "Publicando...";
+      }
+
+      await guardarReporte(formularioHallazgo, "encontrado");
+
+      if (boton) {
+        boton.disabled = false;
+        boton.textContent = "❤️ Publicar hallazgo";
+      }
+
+    });
+  }
+
+</script>
 </body>
 </html>
